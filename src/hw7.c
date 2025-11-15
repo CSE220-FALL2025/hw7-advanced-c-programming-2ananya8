@@ -126,9 +126,28 @@ matrix_sf* transpose_mat_sf(const matrix_sf *mat) {
 
 matrix_sf* create_matrix_sf(char name, const char *expr) {
     
+    const *p = expr;
+    int r, c;
+    int i=1;
+
+    r = &p;
+    c = &p+i;
+    i++;
+
+    matrix_sf *m = malloc(sizeof(matrix_sf) + r*c*sizeof(int));
+    m->name = name;
+    m->num_rows = r;
+    m->num_cols = c;
+
+    int j=0;
+    while (*p && (i<r*c)) {
+        int next = &p+i;
+        i++;
+        m->values[j++] = next;
+    }
+
     
-    
-    return NULL;
+    return m;
 }
 
 //gives precedence of the operation
